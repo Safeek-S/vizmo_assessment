@@ -50,4 +50,10 @@ flutter run
 - Detailed view of event information.
 - Includes event title, time, and additional details.
 
+## Technologies Used
+- Flutter: Cross-platform framework for building mobile applications.
+- MobX: State management library for reactive programming in Flutter.
+- MVVM Architecture: Organizes code into models, views, and view models for maintainability and scalability.
+- Custom Widgets and Animations: Enhance user experience and visual appeal.
+
 
