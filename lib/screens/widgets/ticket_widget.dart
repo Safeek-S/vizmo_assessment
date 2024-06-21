@@ -79,7 +79,7 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
       /// for custom ticket info and bottom section for default text.
       return Container(
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: ValueListenableBuilder(
             valueListenable: updateTicket,
             builder: (context, bool val, _) {
@@ -90,16 +90,15 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
               /// at the top and default text at the bottom. Padding is added for white space.
               return CustomPaint(
                 painter: TicketPainter(
-                  
                   // borderColor: widget.ticketBorderColor,
                   bgColor: widget.ticketBgColor,
                   dottedLineColor: Colors.grey,
                   contentHeight: _calculateContentHeight(),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                  padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 20.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
@@ -108,13 +107,11 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // const SizedBox(height: 8.0),
                             if (widget.ticketInfoWidget != null)
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: widget.ticketInfoWidget,
                               ),
-                            // const SizedBox(height: 4.0),
                           ],
                         ),
                       ),
@@ -128,12 +125,12 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding:  EdgeInsets.only(left: 7),
+                                padding: EdgeInsets.only(left: 7),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                     Text(
+                                    Text(
                                       'Time',
                                       style: TextStyle(
                                         fontSize: AppFonts.mediumText,
@@ -145,7 +142,7 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
                                     Text(
                                       widget.event.getTimeRange(),
                                       textAlign: TextAlign.center,
-                                      style:  TextStyle(
+                                      style: TextStyle(
                                         fontSize: AppFonts.mediumText,
                                         color: Colors.black,
                                         fontWeight: AppFonts.medium,
@@ -159,14 +156,16 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
                                 alignment: Alignment.centerRight,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color:widget.event.status!.name == 'cancelled'? Colors.red.withOpacity(0.5):  Colors.green.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(5)
-                                  ),
+                                      color: widget.event.status!.name ==
+                                              'cancelled'
+                                          ? Colors.red.withOpacity(0.5)
+                                          : Colors.green.withOpacity(0.5),
+                                      borderRadius: BorderRadius.circular(5)),
                                   padding: const EdgeInsets.all(7),
-                                  
+                                  margin: EdgeInsets.only(right: 7),
                                   child: Text(
                                     widget.event.status!.name,
-                                    style:  TextStyle(
+                                    style: TextStyle(
                                       fontSize: AppFonts.smallText,
                                       fontWeight: AppFonts.semiBold,
                                       color: Colors.white,
@@ -271,10 +270,10 @@ class TicketPainter extends CustomPainter {
       ..color = bgColor;
 
     // final paintBorder = Paint()
-      // ..strokeWidth = 1
-      // ..style = PaintingStyle.stroke
-      // ..strokeCap = StrokeCap.round;
-      // ..color = borderColor;
+    // ..strokeWidth = 1
+    // ..style = PaintingStyle.stroke
+    // ..strokeCap = StrokeCap.round;
+    // ..color = borderColor;
 
     final paintDottedLine = Paint()
       ..color = dottedLineColor
@@ -295,7 +294,7 @@ class TicketPainter extends CustomPainter {
     _drawCutout(path, 0.0, leftCutoutStartY - _cutoutDiameter);
     path.lineTo(0, _cornerGap);
     _drawCornerArc(path, _cornerGap, 0);
-     canvas.drawShadow(path, Colors.grey, 5.0, false);
+    canvas.drawShadow(path, Colors.grey, 5.0, false);
 
     canvas.drawPath(path, paintBg);
     // canvas.drawPath(path, paintBorder);
