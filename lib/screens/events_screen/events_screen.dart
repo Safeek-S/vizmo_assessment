@@ -102,7 +102,7 @@ class _EventsScreenState extends State<EventsScreen> {
                                 vm.navigateToEventInfoScreen(vm.chosenEvents[index]);
                               },
                               child: DynamicTicketWidget(
-                                ticketBorderColor: Colors.black,
+                                // ticketBorderColor: Colors.black,
                                 ticketBgColor:  Colors.white,
                                 event: vm.chosenEvents[index],
                                 ticketInfoWidget: Text(

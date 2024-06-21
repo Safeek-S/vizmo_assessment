@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../models/event_model/event_model.dart';
 
 class DynamicTicketWidget extends StatefulWidget {
-  final Color ticketBorderColor;
+  // final Color ticketBorderColor;
   final Color ticketBgColor;
   final Widget? ticketInfoWidget;
   final Event event;
@@ -14,7 +14,7 @@ class DynamicTicketWidget extends StatefulWidget {
   const DynamicTicketWidget({
     super.key,
     required this.event,
-    required this.ticketBorderColor,
+    // required this.ticketBorderColor,
     required this.ticketBgColor,
     required this.ticketInfoWidget,
   });
@@ -91,9 +91,9 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
               return CustomPaint(
                 painter: TicketPainter(
                   
-                  borderColor: widget.ticketBorderColor,
+                  // borderColor: widget.ticketBorderColor,
                   bgColor: widget.ticketBgColor,
-                  dottedLineColor: Colors.black,
+                  dottedLineColor: Colors.grey,
                   contentHeight: _calculateContentHeight(),
                 ),
                 child: Padding(
@@ -108,55 +108,62 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 8.0),
+                            // const SizedBox(height: 8.0),
                             if (widget.ticketInfoWidget != null)
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: widget.ticketInfoWidget,
                               ),
-                            const SizedBox(height: 4.0),
+                            // const SizedBox(height: 4.0),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 38.0),
+                      const SizedBox(height: 25.0),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 20.0),
+                          const SizedBox(height: 23.0),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                   Text(
-                                    'Time',
-                                    style: TextStyle(
-                                      fontSize: AppFonts.mediumText,
-                                      color: Colors.black,
-                                      fontWeight: AppFonts.semiBold,
-                                      fontStyle: FontStyle.normal,
+                              Padding(
+                                padding:  EdgeInsets.only(left: 7),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                     Text(
+                                      'Time',
+                                      style: TextStyle(
+                                        fontSize: AppFonts.mediumText,
+                                        color: Colors.black,
+                                        fontWeight: AppFonts.semiBold,
+                                        fontStyle: FontStyle.normal,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    widget.event.getTimeRange(),
-                                    textAlign: TextAlign.center,
-                                    style:  TextStyle(
-                                      fontSize: AppFonts.mediumText,
-                                      color: Colors.black,
-                                      fontWeight: AppFonts.medium,
-                                      fontStyle: FontStyle.italic,
+                                    Text(
+                                      widget.event.getTimeRange(),
+                                      textAlign: TextAlign.center,
+                                      style:  TextStyle(
+                                        fontSize: AppFonts.mediumText,
+                                        color: Colors.black,
+                                        fontWeight: AppFonts.medium,
+                                        fontStyle: FontStyle.italic,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               Align(
                                 alignment: Alignment.centerRight,
                                 child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  color:widget.event.status!.name == 'cancelled'? Colors.red:  Colors.green,
+                                  decoration: BoxDecoration(
+                                    color:widget.event.status!.name == 'cancelled'? Colors.red.withOpacity(0.5):  Colors.green.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(5)
+                                  ),
+                                  padding: const EdgeInsets.all(7),
+                                  
                                   child: Text(
                                     widget.event.status!.name,
                                     style:  TextStyle(
@@ -208,7 +215,7 @@ class _DynamicTicketWidgetState extends State<DynamicTicketWidget> {
 /// visual elements like the cutouts and dotted line divider. It takes in
 /// parameters like colors and sizing to draw the ticket.
 class TicketPainter extends CustomPainter {
-  final Color borderColor;
+  // final Color borderColor;
   final Color bgColor;
   final Color dottedLineColor;
   final double contentHeight;
@@ -224,7 +231,7 @@ class TicketPainter extends CustomPainter {
 
   TicketPainter({
     required this.bgColor,
-    required this.borderColor,
+    // required this.borderColor,
     required this.dottedLineColor,
     required this.contentHeight,
   });
@@ -263,11 +270,11 @@ class TicketPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..color = bgColor;
 
-    final paintBorder = Paint()
-      ..strokeWidth = 1
-      ..style = PaintingStyle.stroke
-      ..strokeCap = StrokeCap.round
-      ..color = borderColor;
+    // final paintBorder = Paint()
+      // ..strokeWidth = 1
+      // ..style = PaintingStyle.stroke
+      // ..strokeCap = StrokeCap.round;
+      // ..color = borderColor;
 
     final paintDottedLine = Paint()
       ..color = dottedLineColor
@@ -288,9 +295,10 @@ class TicketPainter extends CustomPainter {
     _drawCutout(path, 0.0, leftCutoutStartY - _cutoutDiameter);
     path.lineTo(0, _cornerGap);
     _drawCornerArc(path, _cornerGap, 0);
+     canvas.drawShadow(path, Colors.grey, 5.0, false);
 
     canvas.drawPath(path, paintBg);
-    canvas.drawPath(path, paintBorder);
+    // canvas.drawPath(path, paintBorder);
 
     while (dottedLineStartX < dottedLineEndX) {
       canvas.drawLine(

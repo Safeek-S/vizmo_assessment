@@ -38,10 +38,12 @@ class EventInfoScreen extends StatelessWidget {
                       fontSize: AppFonts.bigText, fontWeight: AppFonts.bold),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                     color:eventDetail.status!.name == 'cancelled'? Colors.red.withOpacity(0.5):  Colors.green.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(5)
+                  ),
                   padding: const EdgeInsets.all(10),
-                  color: eventDetail.status!.name == 'cancelled'
-                      ? Colors.red
-                      : Colors.green,
+                 
                   child: Text(
                     eventDetail.status!.name,
                     style: TextStyle(
